@@ -71,13 +71,7 @@ namespace lexer
                 auto tkMatch = tokens[i];
                 bool matches = std::regex_search(inputProgram, match, tkMatch.pattern);
 
-                fmt::print("Trying to match {} for '{}'\n", i, inputProgram.substr(0, 1));
-
-                if(i == 3)
-                {
-                    fmt::print("Trying to match parenthesis for '{}'\n", inputProgram.substr(0, 1));
-                }
-
+                // If it currently doesn't match
                 if(!matches)
                 {
                     // If we have reached the last matchable token
@@ -89,12 +83,9 @@ namespace lexer
                     continue;
                 }
 
-                //fmt::print("{}, i:{}\n", match.position(), i);
-
                 switch (i)
                 {
                     case TOKEN_AMOUNT - 1: {
-                        fmt::print("Whitespace !\n");
                         break;
                     }
                     default: {
@@ -113,7 +104,6 @@ namespace lexer
                 inputProgram = inputProgram.substr(match.length(), inputProgram.length() - match.length());
 
                 //If the string is empty (no tokens left to match), we exit the loop
-                //fmt::print("Length : {}\n", inputProgram.length());
                 if (inputProgram.length() == 0)
                 {
                     keepRunning = false;
